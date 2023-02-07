@@ -1,18 +1,18 @@
-import './globals.css'
+import WagmiProvider from '@/providers/wagmiProvider';
+import ToastProvider from '@/providers/toastProvider';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+import { inter } from '@/utils/fonts';
+import '@/theme/globals.css';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
+    <html lang="en" className={inter.className}>
       <head />
-      <body>{children}</body>
+      <body>
+        <ToastProvider>
+          <WagmiProvider>{children}</WagmiProvider>
+        </ToastProvider>
+      </body>
     </html>
-  )
+  );
 }
