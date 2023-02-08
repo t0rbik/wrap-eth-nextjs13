@@ -1,6 +1,8 @@
 'use client';
 
-import { useConnect, useDisconnect, useAccount, useBalance } from 'wagmi';
+import { useConnect, useDisconnect, useAccount } from 'wagmi';
+
+import { useBalances } from '@/hooks/useBalances';
 
 export default function Account() {
   const { connect, connectors } = useConnect();
@@ -8,15 +10,7 @@ export default function Account() {
 
   const { address, isDisconnected } = useAccount();
 
-  const { data: wethBalance } = useBalance({
-    chainId: 42161,
-    address,
-    token: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
-  });
-  const { data: ethBalance } = useBalance({
-    chainId: 42161,
-    address,
-  });
+  const { wethBalance, ethBalance } = useBalances();
 
   return isDisconnected ? (
     <button onClick={() => connect({ connector: connectors[0] })}>Connect</button>

@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import {
-  useBalance,
   usePrepareSendTransaction,
   useSendTransaction,
   usePrepareContractWrite,
@@ -20,6 +19,7 @@ import { wethABI } from '@/abis/wethABI';
 export default function Wrap({ tokens }: { tokens: Token[] }) {
   const [amount, setAmount] = useState('0');
   const [isUnwrap, setIsUnwrap] = useState(false);
+  const [error, setError] = useState<Error>();
 
   const { config: wrapConfig, error: wrapError } = usePrepareSendTransaction({
     request: {
@@ -103,21 +103,20 @@ export default function Wrap({ tokens }: { tokens: Token[] }) {
         </div>
         <button
           type="submit"
-          className="w-full rounded-xl bg-black p-4 text-lg font-semibold text-white transition-colors hover:bg-green-400 active:bg-green-600"
+          className="w-full rounded-xl bg-black p-4 text-lg font-semibold text-white transition-colors hover:bg-green-400 active:bg-green-600 disabled:bg-zinc-300 disabled:opacity-60"
           onClick={onClick}
+          disabled={(isUnwrap && !unwrap) || (!isUnwrap && !wrap) || amount === '0'}
         >
           {buttonText}
         </button>
       </section>
-      {(wrapError || unwrapError || transactionError) && (
+      {error && (
         <Toast.Root
           type="foreground"
           className="flex flex-col items-center rounded-md p-4 shadow-xl radix-state-closed:animate-hide radix-state-open:animate-slideIn radix-swipe-cancel:translate-x-0 radix-swipe-cancel:transition-transform radix-swipe-end:animate-swipeOut radix-swipe-move:translate-x-radix-toast-swipe-move-x"
         >
           <Toast.Title>Error!</Toast.Title>
-          <Toast.Description>
-            {wrapError?.message} {unwrapError?.message} {transactionError?.message}
-          </Toast.Description>
+          <Toast.Description>{error.message}</Toast.Description>
           <Toast.Close aria-label="Close">
             <span aria-hidden>x</span>
           </Toast.Close>
