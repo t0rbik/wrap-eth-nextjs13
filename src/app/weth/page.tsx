@@ -1,5 +1,4 @@
 import Wrap from './wrap';
-import Account from './account';
 import { Token, SupportedTokens } from '@/types/types';
 
 const tokenlist: Token[] = [
@@ -29,11 +28,8 @@ export default async function WethPage() {
   const tokens = await getTokens();
 
   return (
-    <div>
-      This is server side
-      <br />
-      <Account />
+    <>
       <Wrap tokens={tokens} />
-    </div>
+    </>
   );
 }
