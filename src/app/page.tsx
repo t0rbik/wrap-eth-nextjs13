@@ -15,14 +15,15 @@ export default function Home() {
         <div className="text-5xl font-bold">Wrapped ETH</div>
         <div className={`absolute text-3xl ${kalam.className} -right-1/4 w-max -rotate-6`}>On Arbitrum</div>
       </div>
-      <div className="rounded-md border border-zinc-300 p-4 transition-shadow duration-300 hover:shadow-md">
-        <Link href="/weth">
-          <h2 className="">
-            Wrap ETH <span>-&gt;</span>
-          </h2>
-          <p className="">Easily wrap and unwrap your ETH.</p>
-        </Link>
-      </div>
+      <Link
+        href="/weth"
+        className="block rounded-md border border-zinc-300 p-4 transition-shadow duration-300 hover:shadow-md"
+      >
+        <h2 className="">
+          Wrap ETH <span>-&gt;</span>
+        </h2>
+        <p className="">Easily wrap and unwrap your ETH.</p>
+      </Link>
     </main>
   );
 }

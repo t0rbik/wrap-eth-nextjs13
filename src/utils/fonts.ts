@@ -7,7 +7,7 @@ export const inter = Inter({
 
 export const roboto_mono = Roboto_Mono({
   subsets: ['latin'],
-  display: 'optional',
+  display: 'swap',
 });
 
 export const kalam = Kalam({
