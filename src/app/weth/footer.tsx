@@ -1,5 +1,3 @@
-'use client';
-
 import { GitHubLogoIcon } from '@radix-ui/react-icons/';
 
 export default function Footer() {
